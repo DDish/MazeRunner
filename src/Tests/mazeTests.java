@@ -28,8 +28,9 @@ public class mazeTests {
 		markers = maze.getMarkers();
 	}
 
+	//Tests initial loading of the maze layout file
 	@Test
-	public void test() {
+	public void loadTest() {
 		Assert.assertEquals(NUM_ROWS, map.length);
 		Assert.assertEquals(NUM_COLUMNS, map[0].length);
 		Assert.assertEquals(NUM_MARKS,markers.size());
@@ -41,6 +42,12 @@ public class mazeTests {
 				if(map[i][j].isMarker())
 					Assert.assertTrue(markers.contains(map[i][j].getInitial()));
 			}
+		
+	}
+	
+	//Test recursive procedure for cycling through MazeCells
+	@Test
+	public void recursionTest() {
 		
 	}
 
