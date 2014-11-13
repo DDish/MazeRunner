@@ -1,6 +1,8 @@
 package MazeRunner;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+
 import java.awt.*;
 
 public class Hub extends JFrame {
@@ -11,6 +13,7 @@ public class Hub extends JFrame {
 	public Hub(String file){
 		maze = new Maze(file);
 		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(500,100);
 		setSize(1000,750);
 		setTitle("MazeRunner");
@@ -24,6 +27,13 @@ public class Hub extends JFrame {
 	
 	private void createGUI() {
 		add(maze, BorderLayout.WEST);
+		JPanel p = new JPanel();
+		p.setLayout(new GridLayout(1,2));
+		p.add(new LPanel());
+		JTextArea t = new JTextArea();
+		t.setVisible(false);
+		p.add(t);
+		add(p, BorderLayout.SOUTH);
 		
 	}
 	
