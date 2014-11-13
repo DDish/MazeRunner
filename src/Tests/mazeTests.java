@@ -45,9 +45,9 @@ public class mazeTests {
 		
 	}
 	
-	//Test recursive procedure for cycling through MazeCells
+	//Test adjacency procedure for cycling through MazeCells
 	@Test
-	public void recursionTest() {
+	public void adjacencyTest() {
 		
 	}
 

@@ -1,22 +1,31 @@
 package MazeRunner;
 
 import java.awt.Component;
+import java.awt.Graphics;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.border.*;
 
-public class Maze extends JFrame {
+public class Maze extends JPanel {
 
 	private ArrayList<Character> markers;
 	private MazeCell[][] mazeMap;
 	private static int NUM_ROWS;
 	private static int NUM_COLUMNS;
 	
-	public Maze(String layout) throws FileNotFoundException{
+	public Maze(String layout){
 		markers = new ArrayList<Character>();
-		loadMaze(layout);
+		try {
+			loadMaze(layout);
+		}
+		catch(FileNotFoundException e) {
+			System.out.println(e.getMessage());
+			System.exit(0);
+		}
 		
+		setBorder(new EtchedBorder());
 	}
 
 	private void loadMaze(String layout) throws FileNotFoundException {
@@ -52,5 +61,10 @@ public class Maze extends JFrame {
 	public MazeCell[][] getMazeMap() {
 		// TODO Auto-generated method stub
 		return mazeMap;
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.fillRect(50,50,50,50);
 	}
 }
