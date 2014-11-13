@@ -1,7 +1,6 @@
 package MazeRunner;
 
 public class MazeCell {
-
 	private int row,col;
 	private char initial;
 	private boolean boo;
