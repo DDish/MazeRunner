@@ -14,12 +14,35 @@ public class Maze extends JFrame {
 	private static int NUM_COLUMNS;
 	
 	public Maze(String layout) throws FileNotFoundException{
-		// TODO Auto-generated constructor stub
+		markers = new ArrayList<Character>();
+		loadMaze(layout);
+		
+	}
+
+	private void loadMaze(String layout) throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		int i=0;
 		Scanner sc = new Scanner(new FileReader(layout));
 		mazeMap = new MazeCell[sc.nextInt()][sc.nextInt()];
 		sc.nextLine();
-		
-		markers = new ArrayList<Character>();
+		while(sc.hasNextLine())
+		{
+			int j=0;
+			String st[] = sc.nextLine().split(",");
+			for(String s:st)
+			{
+				boolean bool = false;
+				char c = s.toCharArray()[0];
+				if(c != 'X' && c != '0')
+				{
+					bool = true;
+					markers.add(c);
+				}
+				mazeMap[i][j]=new MazeCell(i,j,bool,c);
+				j++;
+			}
+			i++;
+		}
 	}
 
 	public ArrayList<Character> getMarkers() {

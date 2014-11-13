@@ -38,7 +38,8 @@ public class mazeTests {
 			for(int j=0;j<map[0].length;j++)
 			{
 				Assert.assertNotNull(map[i][j]);
-				Assert.assertTrue(markers.contains(map[i][j].getInitial()));
+				if(map[i][j].isMarker())
+					Assert.assertTrue(markers.contains(map[i][j].getInitial()));
 			}
 		
 	}
