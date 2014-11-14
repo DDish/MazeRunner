@@ -48,7 +48,10 @@ public class mazeTests {
 	//Test adjacency procedure for cycling through MazeCells
 	@Test
 	public void adjacencyTest() {
-		
+		Assert.assertTrue(maze.isAdjacent(1,1,1,2));
+		Assert.assertTrue(maze.isAdjacent(1,1,2,1));
+		Assert.assertFalse(maze.isAdjacent(1,1,3,1));
+		Assert.assertTrue(maze.isAdjacent(15,6,15,5));
 	}
 
 }

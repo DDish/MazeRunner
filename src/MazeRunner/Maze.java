@@ -67,4 +67,9 @@ public class Maze extends JPanel {
 		super.paintComponent(g);
 		g.fillRect(50,50,50,50);
 	}
+	
+	public boolean isAdjacent(int x1, int y1, int x2, int y2)
+	{//I am not sure if this is actually going to be necessary
+		return false;
+	}
 }
