@@ -1,5 +1,6 @@
 package MazeRunner;
 
+import java.util.Queue;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
@@ -9,6 +10,7 @@ public class Hub extends JFrame {
 	
 	private Maze maze;
 	private JPanel mazePanel;
+	private Queue<Robot> robots;
 	
 	public Hub(String file){
 		maze = new Maze(file);
@@ -47,5 +49,13 @@ public class Hub extends JFrame {
 		}
 		
 		h.setVisible(true);
+	}
+	
+	public void issueCommand (Robot r, char marker) {
+		r.setMarker(marker);
+	}
+	
+	public Queue<Robot> getBots() {
+		return robots;
 	}
 }

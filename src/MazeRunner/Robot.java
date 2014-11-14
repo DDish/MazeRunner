@@ -1,7 +1,11 @@
 package MazeRunner;
 
 public class Robot {
+	public enum Marker {
+		CAVERN,BREADCRUMB;
+	}
 	private int row, col;
+	char marker;
 	
 	public Robot(int row, int col){
 		this.row = row;
@@ -28,4 +32,12 @@ public class Robot {
 		return -1;
 	}
 
+	public char getMarker() {
+		return marker;
+	}
+	
+	public void setMarker(char command) {
+		marker = command;
+	}
+	
 }
