@@ -71,6 +71,14 @@ public class Maze extends JPanel {
 		return mazeMap[x][y];
 	}
 	
+	public int getRows(){
+		return NUM_ROWS;
+	}
+	
+	public int getCols(){
+		return NUM_COLUMNS;
+	}
+	
 	public boolean isAdjacent(int x1, int y1, int x2, int y2)
 	{//I am not sure if this is actually going to be necessary
 		return false;
