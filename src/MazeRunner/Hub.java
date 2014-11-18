@@ -46,7 +46,7 @@ public class Hub extends JFrame {
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(500,100);
-		setSize(1000,750);
+		setSize(750,750);
 		setTitle("MazeRunner");
 		setLayout(new BorderLayout());
 		createGUI();
