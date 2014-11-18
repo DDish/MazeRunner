@@ -34,7 +34,7 @@ public class LPanel extends JPanel{
 			for(int j=0;j<3;j++)
 			{
 				g.setColor(list.get(c).getColor());
-				g.fillRect(10+i*92, 5+j*30, 20, 20);
+				g.fillRect(10+i*70, 5+j*30, 20, 20);
 				c++;
 			}
 		repaint();
