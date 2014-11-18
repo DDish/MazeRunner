@@ -44,7 +44,7 @@ public class Maze extends JPanel {
 			{
 				boolean bool = false;
 				char c = s.toCharArray()[0];
-				if(c != 'X' && c != '0')
+				if(c != 'X' && c != '0' && c!='S')
 				{
 					bool = true;
 					markers.add(c);
@@ -71,11 +71,6 @@ public class Maze extends JPanel {
 		return mazeMap[x][y];
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.fillRect(50,50,50,50);
-	}
-	
 	public boolean isAdjacent(int x1, int y1, int x2, int y2)
 	{//I am not sure if this is actually going to be necessary
 		return false;
@@ -84,5 +79,12 @@ public class Maze extends JPanel {
 	public ArrayList<MazeCell> getMarkerList() {
 		// TODO Auto-generated method stub
 		return markerList;
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		for(int i=0;i<mazeMap.length;i++)
+			for(int j=0;j<mazeMap[0].length;j++)
+				mazeMap[i][j].draw(g,j,i,mazeMap[i][j].getColor());
 	}
 }

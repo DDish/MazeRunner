@@ -28,12 +28,12 @@ public class Hub extends JFrame {
 	}
 	
 	private void createGUI() {
-		add(maze, BorderLayout.WEST);
+		add(maze, BorderLayout.CENTER);
 		JPanel p = new JPanel();
 		p.setLayout(new GridLayout(1,2));
 		p.add(new LPanel(this));
 		JTextArea t = new JTextArea();
-		t.setVisible(false);
+		//t.setVisible(false);
 		p.add(t);
 		add(p, BorderLayout.SOUTH);
 		

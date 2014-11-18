@@ -1,6 +1,7 @@
 package MazeRunner;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class MazeCell {
@@ -28,6 +29,9 @@ public class MazeCell {
 		else if(mnum == 'X') {
 			color = Color.BLACK;
 		}
+		else if(mnum == 'S') {
+			color = Color.YELLOW;
+		}
 		else {
 			color = Color.WHITE;
 		}
@@ -45,7 +49,8 @@ public class MazeCell {
 		return boo;
 	}
 
-	public void draw() {
-		
+	public void draw(Graphics g, int x, int y, Color c) {
+		g.setColor(c);
+		g.fillRect(40+x*16,40+y*16,15,15);
 	}
 }
