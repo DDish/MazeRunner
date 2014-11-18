@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -28,11 +29,11 @@ public class LPanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		int c=0;
-		Maze maze = hub.getMaze();
+		ArrayList<MazeCell> list = hub.getMaze().getMarkerList();
 		for(int i=0; i<5;i++)
 			for(int j=0;j<3;j++)
 			{
-				g.setColor(maze.getCellAt(i,j).getColor());
+				g.setColor(list.get(c).getColor());
 				g.fillRect(10+i*92, 5+j*30, 20, 20);
 				c++;
 			}

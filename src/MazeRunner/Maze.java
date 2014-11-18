@@ -11,6 +11,7 @@ import javax.swing.border.*;
 public class Maze extends JPanel {
 
 	private ArrayList<Character> markers;
+	private ArrayList<MazeCell> markerList;
 	private MazeCell[][] mazeMap;
 	private static int NUM_ROWS;
 	private static int NUM_COLUMNS;
@@ -33,6 +34,7 @@ public class Maze extends JPanel {
 		int i=0;
 		Scanner sc = new Scanner(new FileReader(layout));
 		mazeMap = new MazeCell[sc.nextInt()][sc.nextInt()];
+		markerList = new ArrayList<MazeCell>();
 		sc.nextLine();
 		while(sc.hasNextLine())
 		{
@@ -48,6 +50,8 @@ public class Maze extends JPanel {
 					markers.add(c);
 				}
 				mazeMap[i][j]=new MazeCell(i,j,bool,c);
+				if(bool)
+					markerList.add(mazeMap[i][j]);
 				j++;
 			}
 			i++;
@@ -75,5 +79,10 @@ public class Maze extends JPanel {
 	public boolean isAdjacent(int x1, int y1, int x2, int y2)
 	{//I am not sure if this is actually going to be necessary
 		return false;
+	}
+
+	public ArrayList<MazeCell> getMarkerList() {
+		// TODO Auto-generated method stub
+		return markerList;
 	}
 }

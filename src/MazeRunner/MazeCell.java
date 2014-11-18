@@ -14,10 +14,18 @@ public class MazeCell {
 		col = c;
 		boo = b;
 		initial = mnum;
-		int r1 = (int)(Math.random()*255);
-		int g1 = (int)(Math.random()*255);
-		int b1 = (int)(Math.random()*255);
-		color = new Color(r1,g1,b1);
+		if(boo) {
+			int r1 = (int)(Math.random()*255);
+			int g1 = (int)(Math.random()*255);
+			int b1 = (int)(Math.random()*255);
+			color = new Color(r1,g1,b1);
+		}
+		else if(mnum == 'X') {
+			color = Color.BLACK;
+		}
+		else {
+			color = Color.WHITE;
+		}
 	}
 	
 	public char getInitial() {
