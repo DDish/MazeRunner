@@ -19,10 +19,12 @@ public class MPanel extends JPanel{
 		this.hub = hub;
 		setLayout(new BorderLayout());
 		setBorder(new EtchedBorder());
-		JLabel label;
-		label = new JLabel("Groot");
-		add(label,BorderLayout.WEST);
-		add(new JLabel("Bar"),BorderLayout.EAST);
+		
+		JPanel psong = new JPanel();
+		add(psong,BorderLayout.WEST);
+		
+		JPanel mbar = new JPanel();
+		add(mbar,BorderLayout.WEST);
 	}
 	
 	public void paintComponent(Graphics g) {

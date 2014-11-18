@@ -46,7 +46,7 @@ public class Hub extends JFrame {
 		maze = new Maze(file);
 		robots = new LinkedList<Robot>();
 		for(int i=0;i<10;i++)
-			robots.add(new Robot(15,1));
+			robots.add(new Robot(15,1,maze));
 		
 		box = new JComboBox<Character>();
 		for (char c: maze.getMarkers())
