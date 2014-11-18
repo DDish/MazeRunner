@@ -84,23 +84,22 @@ public class Hub extends JFrame {
 		add(p, BorderLayout.SOUTH);
 		
 		JPanel r = new JPanel();
-		//r.setLayout(new GridLayout(2,1));
 		r.setLayout(new BoxLayout(r, BoxLayout.Y_AXIS));
 		
-		//JPanel r1 = new JPanel();
-		//r2.setLayout(new BorderLayout());
-		r.add(new JLabel("Robot List:"), BorderLayout.NORTH);
-		r.add(rlist,BorderLayout.CENTER);
-		//r.add(r1);
+		JPanel r1 = new JPanel();
+		r1.setLayout(new BorderLayout());
+		r1.add(new JLabel("Robot List:"),BorderLayout.NORTH);
+		r1.add(rlist,BorderLayout.CENTER);
+		r.add(r1);
 		
-		//JPanel r2 = new JPanel();
-		//r2.setLayout(new GridLayout(3,1));
-		r.add(new JLabel("Robot Destination:"),BorderLayout.NORTH);
-		r.add(box,BorderLayout.CENTER);
+		JPanel r2 = new JPanel();
+		r2.setLayout(new GridLayout(3,1));
+		r2.add(new JLabel("Robot Destination:"));
+		r2.add(box);
 		find = new JButton("Find");
 		find.addActionListener(new ButtonListener());
-		r.add(find,BorderLayout.SOUTH);
-		//r.add(r2);
+		r2.add(find);
+		r.add(r2);
 		
 		add(r, BorderLayout.EAST);
 	}
