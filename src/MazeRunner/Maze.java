@@ -63,6 +63,10 @@ public class Maze extends JPanel {
 		return mazeMap;
 	}
 	
+	public MazeCell getCellAt(int x, int y) {
+		return mazeMap[x][y];
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.fillRect(50,50,50,50);

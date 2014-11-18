@@ -31,7 +31,7 @@ public class Hub extends JFrame {
 		add(maze, BorderLayout.WEST);
 		JPanel p = new JPanel();
 		p.setLayout(new GridLayout(1,2));
-		p.add(new LPanel());
+		p.add(new LPanel(this));
 		JTextArea t = new JTextArea();
 		t.setVisible(false);
 		p.add(t);
