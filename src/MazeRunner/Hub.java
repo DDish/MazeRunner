@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Hub extends JFrame {
 	
@@ -16,6 +18,18 @@ public class Hub extends JFrame {
 	private JComboBox<Character> box;
 	private JTextArea rlist;
 	private JButton find;
+	private int ct=1;
+	
+	private class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource().equals(find))
+				rlist.setText(newText());
+		}
+		
+	}
+	
 	
 	public Hub(String file){
 		maze = new Maze(file);
@@ -28,12 +42,7 @@ public class Hub extends JFrame {
 			box.addItem(c);
 		
 		rlist = new JTextArea();
-		String s = "";
-		for(int i=1;i<=robots.size();i++)
-		{
-			s+="Robot "+i+"\n";
-		}
-		rlist.setText(s);
+		rlist.setText(newText());
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(500,100);
@@ -41,6 +50,22 @@ public class Hub extends JFrame {
 		setTitle("MazeRunner");
 		setLayout(new BorderLayout());
 		createGUI();
+	}
+
+	private String newText() {
+		// TODO Auto-generated method stub
+		String s = "";
+		for(int i=1;i<=robots.size();i++)
+		{
+			s+="Robot "+i;
+			if(i==ct)
+				s+=" (Current)";
+			s+="\n";
+		}
+		if(ct == robots.size())
+			ct=1;
+		else ct++;
+		return s;
 	}
 
 	public Maze getMaze() {
@@ -59,21 +84,23 @@ public class Hub extends JFrame {
 		add(p, BorderLayout.SOUTH);
 		
 		JPanel r = new JPanel();
-		r.setLayout(new GridLayout(2,1));
+		//r.setLayout(new GridLayout(2,1));
+		r.setLayout(new BoxLayout(r, BoxLayout.Y_AXIS));
 		
-		JPanel r1 = new JPanel();
-		r1.setLayout(new BorderLayout());
-		r1.add(new JLabel("Robot List:"), BorderLayout.NORTH);
-		r1.add(rlist,BorderLayout.CENTER);
-		r.add(r1);
+		//JPanel r1 = new JPanel();
+		//r2.setLayout(new BorderLayout());
+		r.add(new JLabel("Robot List:"), BorderLayout.NORTH);
+		r.add(rlist,BorderLayout.CENTER);
+		//r.add(r1);
 		
-		JPanel r2 = new JPanel();
-		r2.setLayout(new GridLayout(3,1));
-		r2.add(new JLabel("Robot Destination:"),BorderLayout.NORTH);
-		r2.add(box,BorderLayout.CENTER);
+		//JPanel r2 = new JPanel();
+		//r2.setLayout(new GridLayout(3,1));
+		r.add(new JLabel("Robot Destination:"),BorderLayout.NORTH);
+		r.add(box,BorderLayout.CENTER);
 		find = new JButton("Find");
-		r2.add(find,BorderLayout.SOUTH);
-		r.add(r2);
+		find.addActionListener(new ButtonListener());
+		r.add(find,BorderLayout.SOUTH);
+		//r.add(r2);
 		
 		add(r, BorderLayout.EAST);
 	}
