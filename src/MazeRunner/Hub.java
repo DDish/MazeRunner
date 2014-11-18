@@ -18,16 +18,27 @@ public class Hub extends JFrame {
 	private JComboBox<Character> box;
 	private JTextArea rlist;
 	private JButton find;
+	private JLabel groot;
+	private boolean boo=true;
 	private int ct=1;
 	
 	private class ButtonListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(find))
+			{
 				rlist.setText(newText());
+				if(boo)
+				{
+					groot.setIcon(new ImageIcon("Groot.gif"));
+					boo = false;
+				}
+				else {
+					groot.setIcon(new ImageIcon("Static.gif"));
+					boo = true;
+				}
+			}
 		}
-		
 	}
 	
 	
@@ -46,7 +57,7 @@ public class Hub extends JFrame {
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(500,100);
-		setSize(750,750);
+		setSize(835,750);
 		setTitle("MazeRunner");
 		setLayout(new BorderLayout());
 		createGUI();
@@ -78,13 +89,17 @@ public class Hub extends JFrame {
 		JPanel p = new JPanel();				//LEGEND
 		p.setLayout(new GridLayout(1,2));
 		p.add(new LPanel(this));
-		JTextArea t = new JTextArea();
-		//t.setVisible(false);
-		p.add(t);
+		p.add(new MPanel(this));
 		add(p, BorderLayout.SOUTH);
 		
 		JPanel r = new JPanel();
+		r.setBorder(new EtchedBorder());
 		r.setLayout(new BoxLayout(r, BoxLayout.Y_AXIS));
+		
+		JPanel rg = new JPanel();
+		groot = new JLabel(new ImageIcon("Static.gif"));
+		rg.add(groot);
+		r.add(rg,BorderLayout.WEST);
 		
 		JPanel r1 = new JPanel();
 		r1.setLayout(new BorderLayout());
@@ -106,13 +121,6 @@ public class Hub extends JFrame {
 	
 	public static void main(String[] args) {
 		Hub h = new Hub("Maze.csv");
-		MazeCell[][] m = h.getMaze().getMazeMap(); 
-		for(int i=0;i<m.length;i++) {
-			for(int j=0;j<m[0].length;j++)
-				System.out.print(""+m[i][j].getInitial());
-			System.out.println();
-		}
-		
 		h.setVisible(true);
 	}
 	
