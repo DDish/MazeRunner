@@ -40,4 +40,15 @@ public class Robot {
 		marker = command;
 	}
 	
+	public void shareMap(Maze newMap)
+	{
+		//map = union(map, newMap)
+	}
+	
+	public void moveToDestination(char marker)
+	{
+		//if marker in map, A*
+		//else maze traversal algorithm w/ random so not all robots explore the same way
+	}
+	
 }
