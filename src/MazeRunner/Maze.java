@@ -86,6 +86,8 @@ public class Maze extends JPanel {
 	
 	public boolean isAdjacent(int x1, int y1, int x2, int y2)
 	{//I am not sure if this is actually going to be necessary
+		if(Math.abs(x1-x2)==1 && Math.abs(y1-y2)==0) return true;
+		if(Math.abs(x1-x2)==0 && Math.abs(y1-y2)==1) return true;
 		return false;
 	}
 
