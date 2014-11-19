@@ -41,11 +41,14 @@ public class Hub extends JFrame {
 		}
 	}
 	
-	
 	public Hub(String file){
+		this(file, 10);
+	}
+
+	public Hub(String file, int numBots){
 		maze = new Maze(file);
 		robots = new LinkedList<Robot>();
-		for(int i=0;i<10;i++)
+		for(int i=0;i<numBots;i++)
 			robots.add(new Robot(15,1,maze));
 		
 		box = new JComboBox<Character>();

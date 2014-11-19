@@ -16,7 +16,7 @@ public class HubTests {
 	Hub gui;
 	@Before
 	public void setUp(){
-		gui = new Hub("Maze.csv");
+		gui = new Hub("Maze.csv",0);
 		r = new Robot(17,28, m);
 		r1 = new Robot(32, 1, m);
 		r2 = new Robot(1, 32, m);
@@ -30,7 +30,9 @@ public class HubTests {
 	// tests number of robots.
 	@Test
 	public void testNumBots() {
-	assertEquals(4, gui.getBots());
+		assertEquals(3, gui.getBots().size());
+		Hub gui2=new Hub("Maze.csv");
+		assertEquals(10, gui2.getBots().size());
 	}
 	
 	// tests order of robots.
