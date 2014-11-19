@@ -38,7 +38,9 @@ public class robotTests {
 	}
 	@Test
 	public void testDown(){
+		System.out.println("before move: " + r.getRow() + " " + r.getColumn());
 		r.moveDown();
+		System.out.println("after move: " + r.getRow() + " " + r.getColumn());
 		Assert.assertTrue(r.getColumn() == col);
 		Assert.assertTrue(r.getRow()-1 == row);
 		r1.moveDown();

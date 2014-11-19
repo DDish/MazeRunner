@@ -13,6 +13,8 @@ public class Maze extends JPanel {
 	private ArrayList<Character> markers;
 	private ArrayList<MazeCell> markerList;
 	private MazeCell[][] mazeMap;
+	private int rows;
+	private int cols;
 	private static int NUM_ROWS;
 	private static int NUM_COLUMNS;
 	
@@ -53,8 +55,10 @@ public class Maze extends JPanel {
 				if(bool)
 					markerList.add(mazeMap[i][j]);
 				j++;
+				if(cols < j) cols = j;
 			}
 			i++;
+			rows = i;
 		}
 	}
 
@@ -67,16 +71,17 @@ public class Maze extends JPanel {
 		return mazeMap;
 	}
 	
+	
 	public MazeCell getCellAt(int x, int y) {
 		return mazeMap[x][y];
 	}
 	
 	public int getRows(){
-		return NUM_ROWS;
+		return rows;
 	}
 	
 	public int getCols(){
-		return NUM_COLUMNS;
+		return cols;
 	}
 	
 	public boolean isAdjacent(int x1, int y1, int x2, int y2)
