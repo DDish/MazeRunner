@@ -7,17 +7,17 @@ import java.util.ArrayList;
 public class MazeCell {
 	private int row,col,r1=0,g1=0,b1=0;
 	private char initial;
-	private boolean boo;
+	private boolean isMarker;
 	private Color color;
 	
 	public MazeCell(int r, int c, boolean b, char mnum) {
 		// TODO Auto-generated constructor stub
 		row = r;
 		col = c;
-		boo = b;
+		isMarker = b;
 		initial = mnum;
 		
-		if(boo) {
+		if(isMarker) {
 			while(r1 <15 || r1 >230)
 				r1 = (int)(Math.random()*255);
 			while(g1 <5 || g1 >240)
@@ -46,7 +46,7 @@ public class MazeCell {
 	}
 	
 	public boolean isMarker() {
-		return boo;
+		return isMarker;
 	}
 
 	public void draw(Graphics g, int x, int y, Color c) {
