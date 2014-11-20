@@ -100,5 +100,6 @@ public class Maze extends JPanel {
 		for(int i=0;i<mazeMap.length;i++)
 			for(int j=0;j<mazeMap[0].length;j++)
 				mazeMap[i][j].draw(g,j,i,mazeMap[i][j].getColor());
+		repaint();
 	}
 }
