@@ -54,6 +54,14 @@ public class Robot {
 		return col;
 	}
 
+	public void placeBreadcrumb(int row, int col){
+		maze.getMazeMap()[row][col].dropBreadcrumb();
+	}
+	
+	public void pickupBreadcrumb(int row, int col){
+		maze.getMazeMap()[row][col].pickupBreadCrumb();
+	}
+	
 	public char getMarker() {
 		return marker;
 	}
