@@ -67,7 +67,6 @@ public class Maze extends JPanel {
 	}
 
 	public MazeCell[][] getMazeMap() {
-		// TODO Auto-generated method stub
 		return mazeMap;
 	}
 	

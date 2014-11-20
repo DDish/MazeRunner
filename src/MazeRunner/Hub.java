@@ -18,8 +18,8 @@ public class Hub extends JFrame {
 	private JComboBox<Character> box;
 	private JTextArea rlist;
 	private JButton find;
-	private JLabel groot;
-	private boolean boo=true;
+	public JLabel groot;
+	
 	private int ct=1;
 	
 	private class ButtonListener implements ActionListener {
@@ -28,15 +28,10 @@ public class Hub extends JFrame {
 			if(e.getSource().equals(find))
 			{
 				rlist.setText(newText());
-				if(boo)
-				{
-					groot.setIcon(new ImageIcon("Groot.gif"));
-					boo = false;
-				}
-				else {
-					groot.setIcon(new ImageIcon("Static.gif"));
-					boo = true;
-				}
+				Robot r = robots.remove();
+				robots.add(r);
+				issueCommand(r, (char)box.getSelectedItem());
+				
 			}
 		}
 	}
@@ -100,7 +95,7 @@ public class Hub extends JFrame {
 		r.setLayout(new BoxLayout(r, BoxLayout.Y_AXIS));
 		
 		JPanel rg = new JPanel();
-		groot = new JLabel(new ImageIcon("Static.gif"));
+		groot = new JLabel(new ImageIcon("images/Static.gif"));
 		rg.add(groot);
 		r.add(rg,BorderLayout.WEST);
 		
