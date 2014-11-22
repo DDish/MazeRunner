@@ -123,7 +123,7 @@ public class Hub extends JFrame {
 	}
 	
 	public void issueCommand (Robot r, char marker) {
-		r.setMarker(marker);
+		r.moveToDestination(maze,marker);
 	}
 	
 	public Queue<Robot> getBots() {

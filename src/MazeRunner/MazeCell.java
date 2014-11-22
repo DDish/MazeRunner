@@ -40,6 +40,32 @@ public class MazeCell {
 		}
 	}
 	
+	
+	
+	public int getRow() {
+		return row;
+	}
+
+
+
+	public int getCol() {
+		return col;
+	}
+
+
+
+	public void setInitial(char initial) {
+		this.initial = initial;
+	}
+
+
+
+	public void setMarker(boolean isMarker) {
+		this.isMarker = isMarker;
+	}
+
+
+
 	public char getInitial() {
 		return initial;
 	}
