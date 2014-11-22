@@ -61,6 +61,17 @@ public class robotTests {
 		Assert.assertTrue(r1.getColumn() == col1 && r1.getRow() == row1);		
 	}
 	
+	@Test
+	public void testPathfinding(){
+		r.moveToDestination('A');
+		Assert.assertEquals('A',r.getMarker());
+		Assert.assertEquals(1, r.getRow());
+		Assert.assertEquals(1, r.getColumn());
+		r.moveToDestination('S');
+		Assert.assertEquals('S',r.getMarker());
+		Assert.assertEquals(1, r.getRow());
+		Assert.assertEquals(15, r.getColumn());
+	}
 	
 	
 }
