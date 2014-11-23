@@ -230,6 +230,7 @@ public class Robot {
 						break;
 				}	
 			}
+			System.out.format("Current Location %d, %d",this.row,this.col);
 		}
 		else
 		{

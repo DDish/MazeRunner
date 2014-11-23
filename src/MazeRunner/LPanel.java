@@ -15,13 +15,13 @@ public class LPanel extends JPanel{
 	
 	public LPanel(Hub hub) {
 		this.hub = hub;
-		setLayout(new GridLayout(3,5));
+		setLayout(new GridLayout(3,(int) Math.ceil(hub.getMaze().getMarkers().size()/3.0)));
 		setBorder(new EtchedBorder());
-		for(int i=0;i<15;i++)
+		for(char i : hub.getMaze().getMarkers())
 		{
 			JLabel l = new JLabel();
 			l.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-			l.setText("      "+(char)(65+i));
+			l.setText(Character.toString(i));
 			add(l);
 		}
 	}
@@ -30,12 +30,13 @@ public class LPanel extends JPanel{
 		super.paintComponent(g);
 		int c=0;
 		ArrayList<MazeCell> list = hub.getMaze().getMarkerList();
-		for(int i=0; i<5;i++)
-			for(int j=0;j<3;j++)
+		for(int j=0;j<3;j++)
+			for(int i=0; i<(int)Math.ceil(list.size()/3.0);i++)
 			{
 				g.setColor(list.get(c).getColor());
-				g.fillRect(10+i*80, 5+j*30, 20, 20);
+				g.fillRect(25+i*(int)(this.getWidth()/(Math.ceil(list.size()/3)+1)), 5+j*this.getHeight()/3, 20, 20);
 				c++;
+				if(c>=list.size()) break;
 			}
 		repaint();
 	}
