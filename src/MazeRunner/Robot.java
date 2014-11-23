@@ -59,12 +59,12 @@ public class Robot {
 		return col;
 	}
 
-	public void placeBreadcrumb(int row, int col){
-		maze.getMazeMap()[row][col].dropBreadcrumb();
+	public void placeBreadcrumb(int row, int col,Maze trueMap){
+		trueMap.getMazeMap()[row][col].dropBreadcrumb();
 	}
 	
-	public void pickupBreadcrumb(int row, int col){
-		maze.getMazeMap()[row][col].pickupBreadCrumb();
+	public void pickupBreadcrumb(int row, int col,Maze trueMap){
+		trueMap.getMazeMap()[row][col].pickupBreadCrumb();
 	}
 	
 	public char getMarker() {
@@ -229,6 +229,8 @@ public class Robot {
 						moveUp();
 						break;
 				}	
+				this.placeBreadcrumb(this.row, this.col, trueMap);
+				trueMap.repaint();
 			}
 			System.out.format("Current Location %d, %d",this.row,this.col);
 		}
