@@ -91,7 +91,7 @@ public class MazeCell {
 		g.fillRect(40+x*16,40+y*16,15,15);
 		if(hasBreadcrumb){
 			g.setColor(Color.LIGHT_GRAY);
-			g.fillOval(40+x*16,40+y*16,15,15);
+			g.fillOval(42+x*16,42+y*16,10,10);
 		}
 	}
 }
