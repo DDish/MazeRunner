@@ -10,7 +10,7 @@ import MazeRunner.Maze;
 import MazeRunner.Robot;
 
 public class robotTests {
-	private Robot r, r1, r2;
+	private Robot r, r1, r2, r4;
 	private Maze m;
 	private int row, col, row1, col1, row2, col2;
 	@Before
@@ -19,6 +19,7 @@ public class robotTests {
 		r = new Robot(17,28, m);
 		r1 = new Robot(32, 1, m);
 		r2 = new Robot(1, 32, m);
+		r4 = new Robot(1,15,m);
 		
 		col = r.getColumn();
 		row = r.getRow();
@@ -61,6 +62,17 @@ public class robotTests {
 		Assert.assertTrue(r1.getColumn() == col1 && r1.getRow() == row1);		
 	}
 	
+	@Test
+	public void testPathfinding(){
+		r4.moveToDestination(m,'A');
+		Assert.assertEquals('A',r4.getMarker());
+		Assert.assertEquals(1, r4.getRow());
+		Assert.assertEquals(1, r4.getColumn());
+		r4.moveToDestination(m,'S');
+		Assert.assertEquals('S',r4.getMarker());
+		Assert.assertEquals(1, r4.getRow());
+		Assert.assertEquals(15, r4.getColumn());
+	}
 	
 	
 }

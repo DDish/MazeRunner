@@ -43,8 +43,13 @@ public class Hub extends JFrame {
 	public Hub(String file, int numBots){
 		maze = new Maze(file);
 		robots = new LinkedList<Robot>();
+		MazeCell start=null;
+		for (MazeCell i : maze.getMarkerList())
+		{
+			if(i.getInitial()=='S') start=i;
+		}
 		for(int i=0;i<numBots;i++)
-			robots.add(new Robot(15,1,maze));
+			robots.add(new Robot(start.getRow(),start.getCol(),maze));
 		
 		box = new JComboBox<Character>();
 		for (char c: maze.getMarkers())
@@ -123,7 +128,7 @@ public class Hub extends JFrame {
 	}
 	
 	public void issueCommand (Robot r, char marker) {
-		r.setMarker(marker);
+		r.moveToDestination(maze,marker);
 	}
 	
 	public Queue<Robot> getBots() {
