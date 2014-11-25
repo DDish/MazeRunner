@@ -16,12 +16,14 @@ public class Robot {
 	char marker;
 	Maze maze;
 	JLabel groot;
+	Player p;
 	
 	public Robot(int row, int col, Maze maze, JLabel groot){
 		this.row = row;
 		this.col = col;
 		this.maze = maze;//new Maze(row,col,maze.getRows(),maze.getCols());//make a blank copy of the map
 		this.groot = groot;
+		p = new Player();
 	}
 	
 	public void moveUp(){
@@ -244,6 +246,7 @@ public class Robot {
 				trueMap.repaint();
 			}
 			groot.setIcon(new ImageIcon("images/Marker.gif"));
+			p.playSound("Found");
 			try {
 				Thread.sleep(3400);
 			} catch (InterruptedException e) {

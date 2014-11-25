@@ -109,7 +109,7 @@ public class Hub extends JFrame {
 		JPanel p = new JPanel();				//LEGEND
 		p.setLayout(new GridLayout(1,2));
 		p.add(new LPanel(this));
-		p.add(new MPanel(this));
+		p.add(new JPanel());
 		add(p, BorderLayout.SOUTH);
 		
 		JPanel r = new JPanel();
