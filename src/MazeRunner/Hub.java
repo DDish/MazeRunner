@@ -17,8 +17,10 @@ public class Hub extends JFrame {
 	private Queue<Robot> robots;
 	private JComboBox<Character> box;
 	private JTextArea rlist;
-	private JButton find;
+	private JButton find,muteb;
 	public JLabel groot;
+	public Player p;
+	public boolean mute = true;
 	
 	private int ct=1;
 	
@@ -27,12 +29,15 @@ public class Hub extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(find))
 			{
+				p.playSound("Find");
 				rlist.setText(newText());
 				Robot r = robots.remove();
 				robots.add(r);
 				issueCommand(r, (char)box.getSelectedItem());
 				
 			}
+			if(e.getSource().equals(muteb))
+				mute = !mute;
 		}
 	}
 	
@@ -59,6 +64,7 @@ public class Hub extends JFrame {
 		maze = new Maze(file);
 		groot = new JLabel(new ImageIcon("images/Static.gif"));
 		robots = new LinkedList<Robot>();
+		p = new Player();
 		MazeCell start=null;
 		for (MazeCell i : maze.getMarkerList())
 		{
@@ -109,7 +115,9 @@ public class Hub extends JFrame {
 		JPanel p = new JPanel();				//LEGEND
 		p.setLayout(new GridLayout(1,2));
 		p.add(new LPanel(this));
-		p.add(new JPanel());
+		muteb = new JButton("Mute");
+		muteb.addActionListener(new ButtonListener());
+		p.add(muteb);
 		add(p, BorderLayout.SOUTH);
 		
 		JPanel r = new JPanel();
@@ -141,7 +149,26 @@ public class Hub extends JFrame {
 	public static void main(String[] args) {
 		Hub h = new Hub("Maze.csv");
 		h.setVisible(true);
+		int x=0,y=0;
+		while(true)
+		{
+			System.out.println(""+h.mute);
+			if(h.mute)
+			{
+				while(y==x)
+					x = 1+(int)(Math.random()*5);
+			y = x;
+			h.p.playSound("GLaD"+x);
+			}
+			try {
+				Thread.sleep(20000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
+}
+
 	
 	public void issueCommand (Robot r, char marker) {
 		Runnable t = new MyThread(r, marker);
