@@ -25,7 +25,7 @@ import javax.swing.border.EtchedBorder;
 public class MPanel extends JPanel{
 	
 	private Hub hub;
-	private JButton play, pause, next;
+	private JButton play, pause, mute;
 	private JLabel song = new JLabel("Paused");
 	private ArrayList<String> music;
 	File songFile;
@@ -49,7 +49,7 @@ public class MPanel extends JPanel{
 					song.setText("Paused");
 					//clip.stop();
 			}
-			if(e.getSource().equals(next))
+			if(e.getSource().equals(mute))
 			{
 					
 			}
@@ -88,12 +88,12 @@ public class MPanel extends JPanel{
 		pause.setIcon(new ImageIcon("images/Pause.png"));
 		pause.addActionListener(new ButtonListener());
 		
-		next = new JButton();
-		next.setIcon(new ImageIcon("images/Next.png"));
-		next.addActionListener(new ButtonListener());
+		mute = new JButton();
+		mute.setIcon(new ImageIcon("images/Mute.png"));
+		mute.addActionListener(new ButtonListener());
 		mbar.add(play);
 		mbar.add(pause);
-		mbar.add(next);
+		mbar.add(mute);
 		add(mbar);
 	}
 	
