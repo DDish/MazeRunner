@@ -17,9 +17,9 @@ public class HubTests {
 	@Before
 	public void setUp(){
 		gui = new Hub("Maze.csv",0);
-		r = new Robot(17,28, m);
-		r1 = new Robot(32, 1, m);
-		r2 = new Robot(1, 32, m);
+		r = new Robot(17,28, m, null);
+		r1 = new Robot(32, 1, m, null);
+		r2 = new Robot(1, 32, m, null);
 		gui.getBots().add(r);
 		gui.getBots().add(r1);
 		gui.getBots().add(r2);

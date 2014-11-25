@@ -16,10 +16,10 @@ public class robotTests {
 	@Before
 	public void setUp(){
 		m = new Maze("Maze.csv");
-		r = new Robot(17,28, m);
-		r1 = new Robot(32, 1, m);
-		r2 = new Robot(1, 32, m);
-		r4 = new Robot(1,15,m);
+		r = new Robot(17,28, m,null);
+		r1 = new Robot(32, 1, m,null);
+		r2 = new Robot(1, 32, m,null);
+		r4 = new Robot(1,15,m,null);
 		
 		col = r.getColumn();
 		row = r.getRow();
