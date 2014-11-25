@@ -210,6 +210,12 @@ public class Robot {
 			Collections.reverse(directions);//it was built from back to front
 			for (int dir : directions)
 			{
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				switch(dir)
 				{
 					case 0:

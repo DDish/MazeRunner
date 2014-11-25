@@ -36,6 +36,21 @@ public class Hub extends JFrame {
 		}
 	}
 	
+	private class MyThread implements Runnable {
+
+		Robot r;
+		char marker;
+		
+	    public MyThread(Robot r, char marker) {
+			this.r = r;
+			this.marker = marker;
+		}
+
+		public void run(){
+			r.moveToDestination(maze,marker);
+	    }
+	  }
+	
 	public Hub(String file){
 		this(file, 10);
 	}
@@ -128,7 +143,9 @@ public class Hub extends JFrame {
 	}
 	
 	public void issueCommand (Robot r, char marker) {
-		r.moveToDestination(maze,marker);
+		Runnable t = new MyThread(r, marker);
+		Thread thread = new Thread(t);
+		thread.start();
 	}
 	
 	public Queue<Robot> getBots() {
