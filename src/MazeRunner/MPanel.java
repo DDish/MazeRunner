@@ -40,14 +40,14 @@ public class MPanel extends JPanel{
 			if(e.getSource().equals(play))
 			{
 					hub.groot.setIcon(new ImageIcon("images/Groot.gif"));
-					song.setText(songFile.getName().substring(0,songFile.getName().length()-4));
-					clip.start();
+					song.setText("Songs Not Implemented");
+					//clip.start();
 			}
 			if(e.getSource().equals(pause))
 			{
 					hub.groot.setIcon(new ImageIcon("images/Static.gif"));
 					song.setText("Paused");
-					clip.stop();
+					//clip.stop();
 			}
 			if(e.getSource().equals(next))
 			{
