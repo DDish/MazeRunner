@@ -95,7 +95,7 @@ public class Hub extends JFrame {
 		r.setLayout(new BoxLayout(r, BoxLayout.Y_AXIS));
 		
 		JPanel rg = new JPanel();
-		groot = new JLabel(new ImageIcon("images/Static.gif"));
+		groot = new JLabel(new ImageIcon("images/Forward.gif"));
 		rg.add(groot);
 		r.add(rg,BorderLayout.WEST);
 		
