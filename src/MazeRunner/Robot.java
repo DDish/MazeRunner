@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 public class Robot {
 	public enum Marker {
 		CAVERN,BREADCRUMB;
@@ -12,11 +15,13 @@ public class Robot {
 	private int row, col;
 	char marker;
 	Maze maze;
+	JLabel groot;
 	
-	public Robot(int row, int col, Maze maze){
+	public Robot(int row, int col, Maze maze, JLabel groot){
 		this.row = row;
 		this.col = col;
 		this.maze = maze;//new Maze(row,col,maze.getRows(),maze.getCols());//make a blank copy of the map
+		this.groot = groot;
 	}
 	
 	public void moveUp(){
@@ -211,7 +216,7 @@ public class Robot {
 			for (int dir : directions)
 			{
 				try {
-					Thread.sleep(500);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -238,6 +243,14 @@ public class Robot {
 				this.placeBreadcrumb(this.row, this.col, trueMap);
 				trueMap.repaint();
 			}
+			groot.setIcon(new ImageIcon("images/Marker.gif"));
+			try {
+				Thread.sleep(3400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			groot.setIcon(new ImageIcon("images/Static.gif"));
 			System.out.format("Current Location %d, %d",this.row,this.col);
 		}
 		else

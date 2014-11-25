@@ -57,6 +57,7 @@ public class Hub extends JFrame {
 
 	public Hub(String file, int numBots){
 		maze = new Maze(file);
+		groot = new JLabel(new ImageIcon("images/Static.gif"));
 		robots = new LinkedList<Robot>();
 		MazeCell start=null;
 		for (MazeCell i : maze.getMarkerList())
@@ -64,11 +65,12 @@ public class Hub extends JFrame {
 			if(i.getInitial()=='S') start=i;
 		}
 		for(int i=0;i<numBots;i++)
-			robots.add(new Robot(start.getRow(),start.getCol(),maze));
+			robots.add(new Robot(start.getRow(),start.getCol(),maze, groot));
 		
 		box = new JComboBox<Character>();
 		for (char c: maze.getMarkers())
-			box.addItem(c);
+			if(c != 'S')
+				box.addItem(c);
 		
 		rlist = new JTextArea();
 		rlist.setText(newText());
@@ -115,7 +117,6 @@ public class Hub extends JFrame {
 		r.setLayout(new BoxLayout(r, BoxLayout.Y_AXIS));
 		
 		JPanel rg = new JPanel();
-		groot = new JLabel(new ImageIcon("images/Static.gif"));
 		rg.add(groot);
 		r.add(rg,BorderLayout.WEST);
 		
