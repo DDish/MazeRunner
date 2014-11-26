@@ -16,7 +16,7 @@ public class mazeTests {
 	private static Maze maze;
 	private static MazeCell[][] map;
 	private static ArrayList<Character> markers;
-	public static final int NUM_MARKS = 15;
+	public static final int NUM_MARKS = 16;
 	public static final int NUM_ROWS = 34;
 	public static final int NUM_COLUMNS = 34;
 	
