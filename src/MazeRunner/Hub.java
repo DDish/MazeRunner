@@ -15,7 +15,7 @@ public class Hub extends JFrame {
 	private Maze maze;
 	private JPanel mazePanel;
 	private Queue<Robot> robots;
-	private JComboBox<Character> box;
+	private JComboBox box;
 	private JTextArea rlist;
 	private JButton find,muteb;
 	public JLabel groot;
@@ -33,7 +33,7 @@ public class Hub extends JFrame {
 				rlist.setText(newText());
 				Robot r = robots.remove();
 				robots.add(r);
-				issueCommand(r, (char)box.getSelectedItem());
+				issueCommand(r, (Character)box.getSelectedItem());
 				
 			}
 			if(e.getSource().equals(muteb))
@@ -73,7 +73,7 @@ public class Hub extends JFrame {
 		for(int i=0;i<numBots;i++)
 			robots.add(new Robot(start.getRow(),start.getCol(),maze, groot));
 		
-		box = new JComboBox<Character>();
+		box = new JComboBox();
 		for (char c: maze.getMarkers())
 			if(c != 'S')
 				box.addItem(c);
@@ -171,6 +171,7 @@ public class Hub extends JFrame {
 
 	
 	public void issueCommand (Robot r, char marker) {
+		r.setMarker(marker);
 		Runnable t = new MyThread(r, marker);
 		Thread thread = new Thread(t);
 		thread.start();
@@ -178,5 +179,9 @@ public class Hub extends JFrame {
 	
 	public Queue<Robot> getBots() {
 		return robots;
+	}
+	
+	public void getCommand() {
+		
 	}
 }

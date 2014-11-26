@@ -255,6 +255,7 @@ public class Robot {
 			}
 			groot.setIcon(new ImageIcon("images/Static.gif"));
 			System.out.format("Current Location %d, %d",this.row,this.col);
+			System.out.println("marker: " + this.getMarker());
 		}
 		else
 		{

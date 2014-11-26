@@ -53,14 +53,13 @@ public class HubTests {
 	// tests that robot receives order correctly. 
 	@Test
 	public void testSetDestination() {
-	gui.issueCommand(gui.getBots().peek(), 'D');
-	assertEquals('D', gui.getBots().peek().getMarker());
+	gui.issueCommand(gui.getBots().peek(), 'F');
+	assertEquals('F', gui.getBots().peek().getMarker());
 	gui.getBots().remove();
 	gui.issueCommand(gui.getBots().peek(), 'H');
 	assertEquals('H', gui.getBots().peek().getMarker());
 	gui.getBots().remove();
-	gui.issueCommand(gui.getBots().peek(), 'E');
-	assertEquals('E', gui.getBots().peek().getMarker());
-	
+	gui.issueCommand(gui.getBots().peek(), 'O');
+	assertEquals('O', gui.getBots().peek().getMarker());
 	}
 }
