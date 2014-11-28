@@ -20,7 +20,7 @@ public class Hub extends JFrame {
 	private JButton find,muteb;
 	public JLabel groot;
 	public Player p;
-	public boolean mute = true;
+	public boolean mute = false;
 	
 	private int ct=1;
 	
@@ -29,15 +29,26 @@ public class Hub extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(find))
 			{
-				p.playSound("Find");
-				rlist.setText(newText());
-				Robot r = robots.remove();
-				robots.add(r);
-				issueCommand(r, (Character)box.getSelectedItem());
-				
+				boolean going = false;
+				for(Robot c : robots)
+					going |= c.isGoing();
+				if(!going)
+				{
+					if(!mute)
+						p.playSound("Find");
+					rlist.setText(newText());
+					Robot r = robots.remove();
+					robots.add(r);
+					issueCommand(r, (Character)box.getSelectedItem());
+				}
 			}
 			if(e.getSource().equals(muteb))
+			{
 				mute = !mute;
+				if(mute)
+					for(Robot c : robots)
+						c.setMute(true);
+			}
 		}
 	}
 	
@@ -149,24 +160,6 @@ public class Hub extends JFrame {
 	public static void main(String[] args) {
 		Hub h = new Hub("Maze.csv");
 		h.setVisible(true);
-		int x=0,y=0;
-		while(true)
-		{
-			System.out.println(""+h.mute);
-			if(h.mute)
-			{
-				while(y==x)
-					x = 1+(int)(Math.random()*5);
-			y = x;
-			h.p.playSound("GLaD"+x);
-			}
-			try {
-				Thread.sleep(20000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	}
 }
 
 	

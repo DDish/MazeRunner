@@ -13,6 +13,7 @@ public class Robot {
 		CAVERN,BREADCRUMB;
 	}
 	private int row, col;
+	private boolean going = false, mute = false;
 	char marker;
 	Maze maze;
 	JLabel groot;
@@ -78,6 +79,10 @@ public class Robot {
 		return marker;
 	}
 	
+	public boolean isGoing() {
+		return going;
+	}
+	
 	public void setMarker(char command) {
 		marker = command;
 	}
@@ -118,6 +123,7 @@ public class Robot {
 	
 	public void moveToDestination(Maze trueMap, char marker)
 	{
+		going = true;
 		this.marker=marker;
 		if (maze.getMarkers().contains(marker))
 		{
@@ -246,7 +252,8 @@ public class Robot {
 				trueMap.repaint();
 			}
 			groot.setIcon(new ImageIcon("images/Marker.gif"));
-			p.playSound("Found");
+			if(!mute)
+				p.playSound("Found");
 			try {
 				Thread.sleep(3400);
 			} catch (InterruptedException e) {
@@ -256,11 +263,17 @@ public class Robot {
 			groot.setIcon(new ImageIcon("images/Static.gif"));
 			System.out.format("Current Location %d, %d",this.row,this.col);
 			System.out.println("marker: " + this.getMarker());
+			going =false;
 		}
 		else
 		{
 			//else maze traversal algorithm w/ random so not all robots explore the same way
 		}
+	}
+
+	public void setMute(boolean b) {
+		// TODO Auto-generated method stub
+		mute = b;
 	}
 	
 }
