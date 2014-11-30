@@ -26,7 +26,7 @@ public class Robot {
 	private boolean foundCavern;
 	private Stack<String> path;//contains a representation of the movements that it takes for a robot to reach an associated node.
 	private Map<String, ArrayList<Stack<String>>> pathsList;//key is a string of the marker, values are paths.
-	private long pause = 25;
+	private long pause = 1;
 
 	public Robot(int row, int col, Maze maze, JLabel groot){
 		this.row = row;
@@ -325,7 +325,7 @@ public class Robot {
 		if(pathsList.containsKey(Character.toString(marker))){
 			maze.clearBreadCrumbs();
 			Stack<String> shortest = new Stack<String>();
-			for(Stack<String> s: pathsList.get(marker)){
+			for(Stack<String> s: pathsList.get(Character.toString(marker))){
 				if(shortest.size() == 0 || s.size() < shortest.size()){
 					shortest = s;
 				}
@@ -343,10 +343,10 @@ public class Robot {
 			if(foundCavern){
 				String cavern = Character.toString(marker);//cast the cavern to string for use in map
 				ArrayList<Stack<String>> list = new ArrayList<Stack<String>>();
-				if(pathsList.containsKey(marker)){
-					list.addAll(pathsList.get(marker));//get the list, if it is not null
-					if(!path.empty())list.add(path);//add the path
+				if(pathsList.containsKey(cavern)){
+					list = pathsList.get(cavern);//get the list, if it is not null
 				}
+				if(!path.empty())list.add(path);//add the path
 				pathsList.put(cavern, list);//replace old list
 				maze.editInProgress = false;
 				System.out.println("found");
