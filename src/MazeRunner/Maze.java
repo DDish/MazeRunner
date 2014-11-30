@@ -17,6 +17,7 @@ public class Maze extends JPanel {
 	private int cols;
 	private static int NUM_ROWS;
 	private static int NUM_COLUMNS;
+	public boolean editInProgress = false;
 	
 	public Maze(String layout){
 		markers = new ArrayList<Character>();

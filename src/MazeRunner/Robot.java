@@ -330,19 +330,28 @@ public class Robot {
 					shortest = s;
 				}
 			}
+			maze.editInProgress = true;
 			followRoute(shortest);
+			maze.editInProgress = false;
 		}
 		else{
+			maze.editInProgress = true;
 			maze.clearBreadCrumbs();
 			path = new Stack <String>();
 			foundCavern = false;//set found state to false, so we can check if we need to add the path when we search
 			findRecursively(maze, row, col);
 			if(foundCavern){
 				String cavern = Character.toString(marker);//cast the cavern to string for use in map
-				ArrayList<Stack<String>> list = pathsList.get(marker);//get the list
-				list.add(path);//add the path
+				ArrayList<Stack<String>> list = new ArrayList<Stack<String>>();
+				if(pathsList.containsKey(marker)){
+					list.addAll(pathsList.get(marker));//get the list, if it is not null
+					if(!path.empty())list.add(path);//add the path
+				}
 				pathsList.put(cavern, list);//replace old list
+				maze.editInProgress = false;
+				System.out.println("found");
 			}
+			maze.editInProgress = false;
 		}
 	}
 
@@ -389,7 +398,7 @@ public class Robot {
 		recUp(maze, row, col);
 		recLeft(maze, row, col);
 		
-		//the if keeps from clear
+		
 		if(!foundCavern){
 			maze.getCellAt(row, col).pickupBreadCrumb();
 		}

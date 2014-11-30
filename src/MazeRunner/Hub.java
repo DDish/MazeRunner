@@ -27,7 +27,7 @@ public class Hub extends JFrame {
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource().equals(find))
+			if(e.getSource().equals(find) && maze.editInProgress == false)
 			{
 				boolean going = false;
 				for(Robot c : robots)
