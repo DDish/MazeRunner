@@ -81,6 +81,15 @@ public class Maze extends JPanel {
 		}
 	}
 
+	public void clearBreadCrumbs(){
+		for(MazeCell[] m1 : mazeMap){
+			for(MazeCell m : m1){
+				m.pickupBreadCrumb();
+			}
+		}
+		this.repaint();
+	}
+	
 	public ArrayList<Character> getMarkers() {
 		return markers;
 	}

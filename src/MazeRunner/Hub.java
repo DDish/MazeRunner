@@ -63,7 +63,8 @@ public class Hub extends JFrame {
 		}
 
 		public void run(){
-			r.moveToDestination(maze,marker);
+			//r.moveToDestination(maze,marker);
+			r.findRoute(maze);
 	    }
 	  }
 	
