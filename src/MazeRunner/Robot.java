@@ -244,7 +244,6 @@ public class Robot {
 						}
 					}
 				}
-
 				System.out.format("Open List: %d\nClosed List: %d\nCurrent: %d, %d\n",openList.size(),closedList.size(),current.row,current.column);
 			}
 			//back track out path
@@ -308,16 +307,7 @@ public class Robot {
 				this.placeBreadcrumb(this.row, this.col, trueMap);//what happened to this? This used to work right?
 				trueMap.repaint();
 			}
-			groot.setIcon(new ImageIcon("images/Marker.gif"));
-			if(!mute)
-				p.playSound("Found");
-			try {
-				Thread.sleep(3400);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			groot.setIcon(new ImageIcon("images/Static.gif"));
+	
 			System.out.format("Current Location %d, %d",this.row,this.col);
 			System.out.println("marker: " + this.getMarker());
 			going = false;
@@ -406,6 +396,12 @@ public class Robot {
 		this.row=row;//actually move the robot
 		this.col=col;
 		maze.repaint();
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (visited.contains(maze.getCellAt(row, col))) return;//don't revisit cells
 		visited.add(maze.getCellAt(row,col));
 		try {
@@ -416,6 +412,16 @@ public class Robot {
 		placeBreadcrumb(row, col, maze);
 		if(currentLocation.getInitial() == marker || foundCavern == true){
 			foundCavern = true;
+			groot.setIcon(new ImageIcon("images/Marker.gif"));
+			if(!mute)
+				p.playSound("Found");
+			try {
+				Thread.sleep(3400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			groot.setIcon(new ImageIcon("images/Static.gif"));
 			return;
 		}
 		recRight(maze, row, col);
