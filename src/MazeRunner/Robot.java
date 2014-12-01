@@ -55,6 +55,18 @@ public class Robot {
 	private void resetPosition(){
 		this.row = this.startRow;
 		this.col = this.startCol;
+		groot.setIcon(new ImageIcon("images/Marker.gif"));
+		if(!mute)
+			p.playSound("Found");
+		try {
+			Thread.sleep(3400);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		groot.setIcon(new ImageIcon("images/Static.gif"));
+		System.out.format("Current Location %d, %d",this.row,this.col);
+		System.out.println("marker: " + this.getMarker());
+		going = false;
 	}
 
 	public boolean moveUp(){
@@ -295,7 +307,7 @@ public class Robot {
 			for (int dir : directions)
 			{
 				try {
-					Thread.sleep(200);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -404,7 +416,7 @@ public class Robot {
 		while(iter.hasNext()){
 			String s = iter.next();
 			try {
-				Thread.sleep(pause);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}
@@ -435,7 +447,7 @@ public class Robot {
 	private void findRecursively(Maze maze, int row, int col){
 		maze.repaint();
 		try {
-			Thread.sleep(pause);
+			Thread.sleep(200);
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
@@ -453,7 +465,7 @@ public class Robot {
 				stepBack();
 				maze.repaint();
 				try {
-					Thread.sleep(pause );
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
@@ -468,7 +480,7 @@ public class Robot {
 				stepBack();
 				maze.repaint();
 				try {
-					Thread.sleep(pause );
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
@@ -483,7 +495,7 @@ public class Robot {
 				stepBack();
 				maze.repaint();
 				try {
-					Thread.sleep(pause );
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
@@ -498,7 +510,7 @@ public class Robot {
 				stepBack();
 				maze.repaint();
 				try {
-					Thread.sleep(pause );
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}

@@ -42,7 +42,6 @@ public class Hub extends JFrame {
 				{
 					if(!mute)
 						p.playSound("Find");
-					rlist.setText(newText());
 					Robot r = robots.remove();
 					robots.add(r);
 					issueCommand(r, (Character)box.getSelectedItem());
@@ -73,6 +72,7 @@ public class Hub extends JFrame {
 		public void run(){
 			//r.moveToDestination(maze,marker);
 			r.findRoute(maze);
+			rlist.setText(newText());
 	    }
 	  }
 	
