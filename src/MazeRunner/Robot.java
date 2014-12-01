@@ -406,7 +406,7 @@ public class Robot {
 		this.col=col;
 		maze.repaint();
 		try {
-			Thread.sleep(200);
+			Thread.sleep(20);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
