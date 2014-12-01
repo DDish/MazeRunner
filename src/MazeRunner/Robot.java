@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
 import java.util.Stack;
 
 import javax.swing.ImageIcon;
@@ -346,6 +347,21 @@ public class Robot {
 
 
 	//The following are used for non a* navigation.
+	public void askRobotForPaths(Robot toUpdateFrom){
+		Set<Map.Entry<String, ArrayList<Stack<String>>>> entries = toUpdateFrom.pathsList.entrySet();
+		for ( Map.Entry<String, ArrayList<Stack<String>>> entry : entries ) {
+		  ArrayList<Stack<String>> secondMapValue = this.pathsList.get( entry.getKey() );
+		  if ( secondMapValue == null ) {
+		    this.pathsList.put( entry.getKey(), entry.getValue() );
+		  }
+		  else {
+		    secondMapValue.addAll( entry.getValue() );
+		  }
+		}
+		System.out.println("done sharing");
+	}
+	
+	
 	public void findRoute(Maze maze){
 		if(pathsList.containsKey(Character.toString(marker))){
 			maze.clearBreadCrumbs();
