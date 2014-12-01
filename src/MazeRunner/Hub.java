@@ -25,6 +25,12 @@ public class Hub extends JFrame {
 	private int ct=1;
 	
 	private class ButtonListener implements ActionListener {
+		private Hub hub;
+		public ButtonListener(Hub hub) {
+			// TODO Auto-generated constructor stub
+			this.hub = hub;
+		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(find))
@@ -41,6 +47,8 @@ public class Hub extends JFrame {
 					robots.add(r);
 					issueCommand(r, (Character)box.getSelectedItem());
 				}
+				else JOptionPane.showMessageDialog(hub, "Previous Robot Still Searching", "Please Wait" ,JOptionPane.INFORMATION_MESSAGE);
+			
 			}
 			if(e.getSource().equals(muteb))
 			{
@@ -127,7 +135,7 @@ public class Hub extends JFrame {
 		p.setLayout(new GridLayout(1,2));
 		p.add(new LPanel(this));
 		muteb = new JButton("Mute");
-		muteb.addActionListener(new ButtonListener());
+		muteb.addActionListener(new ButtonListener(this));
 		p.add(muteb);
 		add(p, BorderLayout.SOUTH);
 		
@@ -150,7 +158,7 @@ public class Hub extends JFrame {
 		r2.add(new JLabel("Robot Destination:"));
 		r2.add(box);
 		find = new JButton("Find");
-		find.addActionListener(new ButtonListener());
+		find.addActionListener(new ButtonListener(this));
 		r2.add(find);
 		r.add(r2);
 		
