@@ -33,7 +33,7 @@ public class Hub extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource().equals(find))
+			if(e.getSource().equals(find) && maze.editInProgress == false)
 			{
 				boolean going = false;
 				for(Robot c : robots)
@@ -71,7 +71,8 @@ public class Hub extends JFrame {
 		}
 
 		public void run(){
-			r.moveToDestination(maze,marker);
+			//r.moveToDestination(maze,marker);
+			r.findRoute(maze);
 	    }
 	  }
 	

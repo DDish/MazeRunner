@@ -84,7 +84,9 @@ public class MazeCell {
 	public void pickupBreadCrumb(){
 		hasBreadcrumb = false;
 	}
-	
+	public boolean hasBreadCrumb(){
+		return hasBreadcrumb;
+	}
 
 	public void draw(Graphics g, int x, int y, Color c) {
 		g.setColor(c);
