@@ -38,6 +38,7 @@ public class Maze extends JPanel {
 		cols=c;
 		mazeMap = new MazeCell[r][c];
 		markerList = new ArrayList<MazeCell>();
+		markers = new ArrayList<Character>();
 		for(int i=0;i<r;i++)
 		{
 			for(int j=0;j<c;j++)
@@ -132,5 +133,9 @@ public class Maze extends JPanel {
 		repaint();
 	}
 	
+	public void addMarker(MazeCell cell){
+		markerList.add(cell);
+		markers.add(cell.getInitial());
+	}
 	
 }

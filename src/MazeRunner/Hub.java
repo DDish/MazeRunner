@@ -44,6 +44,7 @@ public class Hub extends JFrame {
 						p.playSound("Find");
 					Robot r = robots.remove();
 					robots.add(r);
+					r.shareMap(robots.peek().maze);
 					issueCommand(r, (Character)box.getSelectedItem());
 				}
 				else JOptionPane.showMessageDialog(hub, "Previous Robot Still Searching", "Please Wait" ,JOptionPane.INFORMATION_MESSAGE);
@@ -70,8 +71,8 @@ public class Hub extends JFrame {
 		}
 
 		public void run(){
-			//r.moveToDestination(maze,marker);
-			r.findRoute(maze);
+			r.moveToDestination(maze,marker);
+			//r.findRoute(maze);
 			rlist.setText(newText());
 	    }
 	  }
@@ -173,7 +174,7 @@ public class Hub extends JFrame {
 
 	
 	public void issueCommand (Robot r, char marker) {
-		r.setMarker(marker);
+		//r.setMarker(marker);
 		Runnable t = new MyThread(r, marker);
 		Thread thread = new Thread(t);
 		thread.start();
