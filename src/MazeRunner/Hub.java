@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 public class Hub extends JFrame {
 	
+	private static int NUM_BOTS = 4;
 	private Maze maze;
 	private JPanel mazePanel;
 	private Queue<Robot> robots;
@@ -78,7 +79,7 @@ public class Hub extends JFrame {
 	  }
 	
 	public Hub(String file){
-		this(file, 10);
+		this(file, NUM_BOTS);
 	}
 
 	public Hub(String file, int numBots){

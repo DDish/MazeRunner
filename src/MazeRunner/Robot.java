@@ -253,6 +253,7 @@ public class Robot {
 			searchNode parent = current.parent;
 			System.out.format("Open List Peek, Should be goal: %d,%d\n",current.row, current.column);
 			ArrayList<Integer> directions= new ArrayList<Integer>();//{right,0}{down,1}{left,2}{up,3}//matches indices for drow and dcol
+			int prev = -1;
 			while(parent!=null)
 			{
 				int dx=current.column-parent.column;
@@ -279,7 +280,7 @@ public class Robot {
 
 			}
 			Collections.reverse(directions);//it was built from back to front
-			int prev = -1;
+			prev = -1;
 			for (int dir : directions)
 			{
 				try {
@@ -417,6 +418,8 @@ public class Robot {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
+		maze.setRobRow(row);
+		maze.setRobCol(col);
 		placeBreadcrumb(row, col, maze);
 		if(currentLocation.getInitial() == marker || foundCavern == true){
 			foundCavern = true;
