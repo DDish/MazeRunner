@@ -2,9 +2,11 @@ package MazeRunner;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -17,7 +19,10 @@ public class Maze extends JPanel {
 	private int cols;
 	private static int NUM_ROWS;
 	private static int NUM_COLUMNS;
+	private int robotRow;
+	private int robotCol;
 	public boolean editInProgress = false;
+	private BufferedImage robot;
 	
 	public Maze(String layout){
 		markers = new ArrayList<Character>();
@@ -29,7 +34,16 @@ public class Maze extends JPanel {
 			System.exit(0);
 		}
 		
+		try {
+			robot = ImageIO.read(new File("images/r2d2.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setBorder(new EtchedBorder());
+		
+		robotRow = 1;
+		robotCol = 15;
 	}
 
 	public Maze(int startx, int starty, int r,int c) {
@@ -131,11 +145,21 @@ public class Maze extends JPanel {
 			for(int j=0;j<mazeMap[0].length;j++)
 				mazeMap[i][j].draw(g,j,i,mazeMap[i][j].getColor());
 		repaint();
+		
+		g.drawImage(robot, 40+robotCol*16, 40+robotRow*16, null);
 	}
 	
 	public void addMarker(MazeCell cell){
 		markerList.add(cell);
 		markers.add(cell.getInitial());
+	}
+	
+	public void setRobRow(int row) {
+		robotRow = row;
+	}
+	
+	public void setRobCol(int col) {
+		robotCol = col;
 	}
 	
 }

@@ -49,6 +49,8 @@ public class Robot {
 				path.push("Up");
 			}
 		}
+		maze.setRobRow(row);
+		maze.setRobCol(col);
 	}
 
 	public void moveDown(){
@@ -306,6 +308,8 @@ public class Robot {
 					break;
 				}	
 				this.placeBreadcrumb(this.row, this.col, trueMap);//what happened to this? This used to work right?
+				trueMap.setRobRow(row);
+				trueMap.setRobCol(col);
 				trueMap.repaint();
 				playGIF(prev, dir);
 				prev = dir;
