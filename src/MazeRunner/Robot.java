@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Stack;
@@ -24,10 +25,11 @@ public class Robot {
 	JLabel groot;
 	Player p;
 
+
 	private boolean foundCavern;
 	private Stack<String> path;//contains a representation of the movements that it takes for a robot to reach an associated node.
 	private Map<String, ArrayList<Stack<String>>> pathsList;//key is a string of the marker, values are paths.
-	private long pause = 100;
+	private long pause = 10;
 
 	//isn't called anywhere
 	public void draw(Graphics g, Color c) {
@@ -54,67 +56,75 @@ public class Robot {
 		this.col = this.startCol;
 	}
 
-	public void moveUp(){
+	public boolean moveUp(){
 		if(row != 0){
 			if(maze.getMazeMap()[row-1][col].getInitial() != 'X'){
 				row--;
 				path.push("Up");
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void moveDown(){
+	public boolean moveDown(){
 		if(row < maze.getRows()){
 			if(maze.getMazeMap()[row+1][col].getInitial() != 'X'){
 				row++;
 				path.push("Down");
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void moveLeft(){
+	public boolean moveLeft(){
 		if(row != 0){
 			if(maze.getMazeMap()[row][col-1].getInitial() != 'X'){
 				col--;
 				path.push("Left");
+				return true;
 			}
 		}
+		return false;
 	}
 
-	public void moveRight(){
+	public boolean moveRight(){
 		if(row < maze.getCols()){
 			if(maze.getMazeMap()[row][col+1].getInitial() != 'X'){
 				col++;
 				path.push("Right");
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public void stepBack(){
 		if(!path.empty()){
-			if(path.firstElement().equals("Up")){
-				path.pop();
-				//pickupBreadcrumb(row, col, maze);
-				this.moveDown();
-				//path.pop();
+			if(path.lastElement().equals("Up")){
+				path.pop();//pops the move from the path, as we stepped back off of it
+				if(this.moveDown()){
+					path.pop();//if we can move in the direction we came from then a direction is placed on the stack, pop it off.
+				}
 			}
-			else if(path.firstElement().equals("Down")){
+			else if(path.lastElement().equals("Down")){
 				path.pop();
-				//pickupBreadcrumb(row, col, maze);
-				this.moveUp();
-				//path.pop();
+				if(this.moveUp()){
+					path.pop();
+				}
 			}
-			else if(path.firstElement().equals("Left")){
+			else if(path.lastElement().equals("Left")){
 				path.pop();
-				//pickupBreadcrumb(row, col, maze);
-				this.moveRight();
-				//path.pop();
+				if(this.moveRight()){
+					path.pop();
+				}
 			}
-			else if(path.firstElement().equals("Right")){
+			else if(path.lastElement().equals("Right")){
 				path.pop();
-				//pickupBreadcrumb(row, col, maze);
-				this.moveLeft();
-				//path.pop();
+				if(this.moveLeft()){
+					path.pop();
+				}
 			}
 		}
 	}
@@ -286,7 +296,6 @@ public class Robot {
 				try {
 					Thread.sleep(200);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				switch(dir)
@@ -317,7 +326,6 @@ public class Robot {
 			try {
 				Thread.sleep(3400);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			groot.setIcon(new ImageIcon("images/Static.gif"));
@@ -332,7 +340,6 @@ public class Robot {
 	}	
 
 	public void setMute(boolean b) {
-		// TODO Auto-generated method stub
 		mute = b;
 	}
 
@@ -345,7 +352,7 @@ public class Robot {
 			Stack<String> shortest = new Stack<String>();
 			for(Stack<String> s: pathsList.get(Character.toString(marker))){
 				if(shortest.size() == 0 || s.size() < shortest.size()){
-					shortest = s;
+					shortest = (Stack<String>) s.clone();
 				}
 			}
 			maze.editInProgress = true;
@@ -362,7 +369,7 @@ public class Robot {
 				String cavern = Character.toString(marker);//cast the cavern to string for use in map
 				ArrayList<Stack<String>> list = new ArrayList<Stack<String>>();
 				if(pathsList.containsKey(cavern)){
-					list = pathsList.get(cavern);//get the list, if it is not null
+					list = (ArrayList<Stack<String>>) pathsList.get(cavern).clone();//get the list, if it is not null
 				}
 				if(!path.empty())list.add(path);//add the path
 				pathsList.put(cavern, list);//replace old list
@@ -376,40 +383,48 @@ public class Robot {
 	}
 
 	private void followRoute(Stack<String> shortestKnown){
-		while(!shortestKnown.empty()){
-			if(shortestKnown.firstElement().equals("Up")){
-				shortestKnown.pop();
-				//pickupBreadcrumb(row, col, maze);
+		Iterator<String> iter = shortestKnown.iterator();
+		placeBreadcrumb(row, col, maze);
+		while(iter.hasNext()){
+			String s = iter.next();
+			try {
+				Thread.sleep(pause);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+			if(s.equals("Up")){
 				this.moveUp();
+				placeBreadcrumb(row, col, maze);
 			}
-			else if(shortestKnown.firstElement().equals("Down")){
-				shortestKnown.pop();
-				//pickupBreadcrumb(row, col, maze);
+			else if(s.equals("Down")){
 				this.moveDown();
+				placeBreadcrumb(row, col, maze);
 			}
-			else if(shortestKnown.firstElement().equals("Left")){
-				shortestKnown.pop();
-				//pickupBreadcrumb(row, col, maze);
+			else if(s.equals("Left")){
 				this.moveLeft();
+				placeBreadcrumb(row, col, maze);
 			}
-			else if(shortestKnown.firstElement().equals("Right")){
-				shortestKnown.pop();
-				//pickupBreadcrumb(row, col, maze);
+			else if(s.equals("Right")){
 				this.moveRight();
+				placeBreadcrumb(row, col, maze);
 			}
+			maze.repaint();
 		}
+		
+		foundCavern = true;
+		resetPosition();
 	}
 
+	
 	private void findRecursively(Maze maze, int row, int col){
-		MazeCell currentLocation = maze.getCellAt(row, col);
 		maze.repaint();
 		try {
 			Thread.sleep(pause);
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-		placeBreadcrumb(currentLocation.getRow(), currentLocation.getCol(), maze);
-		if(currentLocation.getInitial() == marker || foundCavern == true){
+		placeBreadcrumb(row, col, maze);
+		if(maze.getCellAt(row, col).getInitial() == marker || foundCavern == true){
 			foundCavern = true;
 			resetPosition();
 			return;
@@ -419,14 +434,13 @@ public class Robot {
 				moveUp();
 				findRecursively(maze, row-1, col);
 				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
+				stepBack();
+				maze.repaint();
+				try {
+					Thread.sleep(pause );
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
 				}
 			}
 		}
@@ -435,14 +449,13 @@ public class Robot {
 				moveLeft();
 				findRecursively(maze, row, col-1);
 				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
+				stepBack();
+				maze.repaint();
+				try {
+					Thread.sleep(pause );
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
 				}
 			}
 		}
@@ -451,14 +464,13 @@ public class Robot {
 				moveDown();
 				findRecursively(maze, row+1, col);
 				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
+				stepBack();
+				maze.repaint();
+				try {
+					Thread.sleep(pause );
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
 				}
 			}
 		}
@@ -467,95 +479,20 @@ public class Robot {
 				moveRight();
 				findRecursively(maze, row, col+1);
 				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
+				stepBack();
+				maze.repaint();
+				try {
+					Thread.sleep(pause );
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
 				}
 			}
 		}
 
 		if(!foundCavern){
-			maze.getCellAt(currentLocation.getRow(),currentLocation.getCol()).pickupBreadCrumb();
+			maze.getCellAt(row,col).pickupBreadCrumb();
 		}
 	}
 
-	/* May try to use again later, but might have caused problems.
-	private void recUp(Maze maze, int row, int col, MazeCell currentLocation){
-		if(row > 0 && !foundCavern){
-			if(!(maze.getCellAt(row-1, col).getInitial() == 'X') && !maze.getCellAt(row-1, col).hasBreadCrumb() && !foundCavern){
-				moveUp();
-				findRecursively(maze, row-1, col);
-				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
-				}
-			}
-		}
-	}
-	private void recDown(Maze maze, int row, int col, MazeCell currentLocation){
-		if(row < maze.getRows() - 1 && !foundCavern){
-			if(!(maze.getCellAt(row+1, col).getInitial() == 'X') && !maze.getCellAt(row+1, col).hasBreadCrumb() && !foundCavern){
-				moveDown();
-				findRecursively(maze, row+1, col);
-				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
-				}
-			}
-		}
-	}
-	private void recLeft(Maze maze, int row, int col, MazeCell currentLocation){
-		if(col > 0 && !foundCavern){
-			if(!(maze.getCellAt(row, col-1).getInitial() == 'X') && !maze.getCellAt(row, col-1).hasBreadCrumb() && !foundCavern){
-				moveLeft();
-				findRecursively(maze, row, col-1);
-				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
-				}
-			}
-		}
-	}
-	private void recRight(Maze maze, int row, int col, MazeCell currentLocation){
-		if(col < maze.getCols() - 1 && !foundCavern){
-			if(!(maze.getCellAt(row, col+1).getInitial() == 'X') && !maze.getCellAt(row, col+1).hasBreadCrumb() && !foundCavern){
-				moveRight();
-				findRecursively(maze, row, col+1);
-				if(!foundCavern){
-					stepBack();
-					currentLocation = maze.getCellAt(row, col);
-					maze.repaint();
-					try {
-						Thread.sleep(pause );
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
-				}
-			}
-		}
-	}
-	 */
 }
