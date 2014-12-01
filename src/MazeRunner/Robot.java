@@ -277,6 +277,7 @@ public class Robot {
 
 			}
 			Collections.reverse(directions);//it was built from back to front
+			int prev = -1;
 			for (int dir : directions)
 			{
 				try {
@@ -306,6 +307,8 @@ public class Robot {
 				}	
 				this.placeBreadcrumb(this.row, this.col, trueMap);//what happened to this? This used to work right?
 				trueMap.repaint();
+				playGIF(prev, dir);
+				prev = dir;
 			}
 	
 			System.out.format("Current Location %d, %d",this.row,this.col);
@@ -322,6 +325,7 @@ public class Robot {
 		if(marker!='S') moveToDestination(trueMap,'S');//Go home
 		trueMap.editInProgress=false;
 		going=false;
+		groot.setIcon(new ImageIcon("images/Static.gif"));
 	}	
 
 	public void setMute(boolean b) {
@@ -505,6 +509,23 @@ public class Robot {
 					}
 				}
 			}
+		}
+	}
+	
+	private void playGIF(int prev, int dir){
+		String str ="";
+		if(prev+1 == dir || prev-3 == dir)
+			str+="Right";
+		else if(prev+2 == dir || prev-2 == dir || prev == dir)
+			str+="Forward";
+		else if(dir+1 == prev || dir-3 == prev)
+			str+="Left";
+		groot.setIcon(new ImageIcon("images/"+str+".gif"));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
