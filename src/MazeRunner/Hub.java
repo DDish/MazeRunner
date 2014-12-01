@@ -104,7 +104,7 @@ public class Hub extends JFrame {
 	private String newText() {
 		// TODO Auto-generated method stub
 		String s = "";
-		for(int i=1;i<=robots.size();i++)
+		for(int i=0;i<=robots.size();i++)
 		{
 			s+="Robot "+i;
 			if(i==ct)
@@ -112,7 +112,7 @@ public class Hub extends JFrame {
 			s+="\n";
 		}
 		if(ct == robots.size())
-			ct=1;
+			ct=0;
 		else ct++;
 		return s;
 	}
