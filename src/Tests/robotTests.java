@@ -73,8 +73,8 @@ public class robotTests {
 		r4.moveToDestination(m,'A');
 		System.out.println(r4.getTestMarker());
 		Assert.assertEquals('A',r4.getTestMarker());
-		Assert.assertEquals(1, r4.getRow());
-		Assert.assertEquals(1, r4.getColumn());
+		Assert.assertEquals(1, r4.getTestRow());
+		Assert.assertEquals(1, r4.getTestColumn());
 		r4.moveToDestination(m,'S');
 		Assert.assertEquals('S',r4.getMarker());
 		Assert.assertEquals(1, r4.getRow());
@@ -89,9 +89,8 @@ public class robotTests {
 	
 	@Test 
 	public void testCommunication() {
-		r2.moveToDestination(m, 'A');
-		r1.shareMap(r2.getMaze());
-		Assert.assertFalse(r1.getVisited().isEmpty());
+		r1.shareMap(m);
+		Assert.assertFalse(r1.getMaze().isEmpty());
 	}
 	
 }

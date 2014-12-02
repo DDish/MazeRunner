@@ -162,4 +162,10 @@ public class Maze extends JPanel {
 		robotCol = col;
 	}
 	
+	public Boolean isEmpty() {
+		if(mazeMap.length == 0)
+			return true;
+		return false;
+	}
+	
 }

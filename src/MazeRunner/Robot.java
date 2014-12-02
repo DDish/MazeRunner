@@ -22,6 +22,8 @@ public class Robot {
 	private boolean going = false, mute = false;
 	char marker;
 	char testMarker;
+	int testRow;
+	int testCol;
 	Maze maze;
 	JLabel groot;
 	Player p;
@@ -143,6 +145,7 @@ public class Robot {
 					if(maze.getCellAt(i.getRow(), i.getCol()).getInitial()!='?'&&maze.getCellAt(i.getRow(), i.getCol()).getInitial()!='X'&&maze.getCellAt(i.getRow(), i.getCol()).getInitial()!='0')
 					{
 						maze.addMarker(i);
+						System.out.println("Adding marker " + i);
 					}
 				}
 			}
@@ -182,7 +185,7 @@ public class Robot {
 	{
 		going = true;
 		this.marker=marker;
-		this.testMarker = marker;
+		if(marker != 'S') this.testMarker = marker;
 		trueMap.editInProgress=true;
 		trueMap.clearBreadCrumbs();
 		if (maze.getMarkers().contains(marker))
@@ -328,6 +331,8 @@ public class Robot {
 			groot.setIcon(new ImageIcon("images/Search.gif"));
 			visited=new HashSet<MazeCell>();
 			//else maze traversal algorithm w/ random so not all robots explore the same way
+			testRow = row;
+			testCol = col;
 			findRecursively(trueMap,row,col);
 			
 		}
@@ -421,6 +426,8 @@ public class Robot {
 		MazeCell currentLocation = maze.getCellAt(row, col);
 		this.row=row;//actually move the robot
 		this.col=col;
+		this.testRow = row;
+		this.testCol = col;
 		maze.repaint();
 		try {
 			Thread.sleep(20);
@@ -555,6 +562,14 @@ public class Robot {
 	
 	public char getTestMarker() {
 		return testMarker;
+	}
+	
+	public int getTestRow() {
+		return testRow;
+	}
+	
+	public int getTestColumn() {
+		return testCol;
 	}
 	
 	public Maze getMaze() {
