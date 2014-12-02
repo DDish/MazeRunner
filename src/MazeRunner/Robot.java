@@ -33,7 +33,7 @@ public class Robot {
 	public Robot(int row, int col, Maze maze, JLabel groot){
 		this.row = row;
 		this.col = col;//These start reversed, not sure if they are reversed or the calls to here are.
-		this.maze = new Maze(row,col,maze.getRows(),maze.getCols());//make a blank copy of the map
+		//this.maze = new Maze(row,col,maze.getRows(),maze.getCols());//make a blank copy of the map
 		this.groot = groot;
 		p = new Player();
 
@@ -318,10 +318,12 @@ public class Robot {
 	
 			System.out.format("Current Location %d, %d",this.row,this.col);
 			System.out.println("marker: " + this.getMarker());
+			groot.setIcon(new ImageIcon("images/cavern.gif"));
 			going = false;
 		}
 		else
 		{
+			groot.setIcon(new ImageIcon("images/Search.gif"));
 			visited=new HashSet<MazeCell>();
 			//else maze traversal algorithm w/ random so not all robots explore the same way
 			findRecursively(trueMap,row,col);
@@ -329,9 +331,18 @@ public class Robot {
 		}
 		if(marker!='S') moveToDestination(trueMap,'S');//Go home
 		trueMap.editInProgress=false;
-		going=false;
-		groot.setIcon(new ImageIcon("images/Static.gif"));
-	}	
+		going=false;	
+		
+		try {
+			Thread.sleep(3400);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		groot.setIcon(new ImageIcon("images/COMMAND.gif"));
+	}
+		
+		
 
 	public void setMute(boolean b) {
 		// TODO Auto-generated method stub
@@ -423,7 +434,7 @@ public class Robot {
 		placeBreadcrumb(row, col, maze);
 		if(currentLocation.getInitial() == marker || foundCavern == true){
 			foundCavern = true;
-			groot.setIcon(new ImageIcon("images/Marker.gif"));
+			groot.setIcon(new ImageIcon("images/cavern.gif"));
 			if(!mute)
 				p.playSound("Found");
 			try {
@@ -529,7 +540,7 @@ public class Robot {
 			str+="Left";
 		groot.setIcon(new ImageIcon("images/"+str+".gif"));
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(900);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
