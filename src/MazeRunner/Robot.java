@@ -51,8 +51,6 @@ public class Robot {
 				path.push("Up");
 			}
 		}
-		maze.setRobRow(row);
-		maze.setRobCol(col);
 	}
 
 	public void moveDown(){
