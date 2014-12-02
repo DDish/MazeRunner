@@ -53,14 +53,14 @@ public class robotTests {
 		r.moveRight();
 		Assert.assertTrue(r.getColumn()-1 == col && r.getRow() == row);
 		r2.moveRight();
-		Assert.assertTrue(r2.getColumn() == col2 && r2.getRow() == row2);
+		Assert.assertTrue(r2.getColumn()-1 == col2 && r2.getRow() == row2);
 	}
 	@Test
 	public void testLeft(){
 		r.moveLeft();
 		Assert.assertTrue(r.getColumn()+1 == col && r.getRow() == row);
 		r1.moveLeft();
-		Assert.assertTrue(r1.getColumn() == col1 && r1.getRow() == row1);		
+		Assert.assertTrue(r1.getColumn()+1 == col1 && r1.getRow() == row1);		
 	}
 	
 	@Test
