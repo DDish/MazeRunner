@@ -175,7 +175,7 @@ public class Hub extends JFrame {
 
 	
 	public void issueCommand (Robot r, char marker) {
-		//r.setMarker(marker);
+		r.setMarker(marker);
 		Runnable t = new MyThread(r, marker);
 		Thread thread = new Thread(t);
 		thread.start();
