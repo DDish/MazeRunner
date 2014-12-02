@@ -324,6 +324,12 @@ public class Robot {
 			System.out.format("Current Location %d, %d",this.row,this.col);
 			System.out.println("marker: " + this.getMarker());
 			groot.setIcon(new ImageIcon("images/cavern.gif"));
+			try {
+				Thread.sleep(3400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			going = false;
 		}
 		else
@@ -342,7 +348,7 @@ public class Robot {
 		going=false;	
 		
 		try {
-			Thread.sleep(3400);
+			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
