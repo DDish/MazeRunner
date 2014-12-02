@@ -1,6 +1,10 @@
 package Tests;
 
 import static org.junit.Assert.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -10,16 +14,17 @@ import MazeRunner.Maze;
 import MazeRunner.Robot;
 
 public class robotTests {
+	JLabel groot = new JLabel();
 	private Robot r, r1, r2, r4;
 	private Maze m;
 	private int row, col, row1, col1, row2, col2;
 	@Before
 	public void setUp(){
 		m = new Maze("Maze.csv");
-		r = new Robot(17,28, m,null);
-		r1 = new Robot(32, 1, m,null);
-		r2 = new Robot(1, 32, m,null);
-		r4 = new Robot(1,15,m,null);
+		r = new Robot(17,28, m,groot);
+		r1 = new Robot(32, 1, m,groot);
+		r2 = new Robot(1, 32, m,groot);
+		r4 = new Robot(1,15,m,groot);
 		
 		col = r.getColumn();
 		row = r.getRow();
@@ -66,7 +71,8 @@ public class robotTests {
 	@Test
 	public void testPathfinding(){
 		r4.moveToDestination(m,'A');
-		Assert.assertEquals('A',r4.getMarker());
+		System.out.println(r4.getTestMarker());
+		Assert.assertEquals('A',r4.getTestMarker());
 		Assert.assertEquals(1, r4.getRow());
 		Assert.assertEquals(1, r4.getColumn());
 		r4.moveToDestination(m,'S');
@@ -75,5 +81,17 @@ public class robotTests {
 		Assert.assertEquals(15, r4.getColumn());
 	}
 	
+	@Test
+	public void testMemory() {
+		r4.moveToDestination(m, 'A');
+		Assert.assertFalse(r4.getVisited().isEmpty());
+	}
+	
+	@Test 
+	public void testCommunication() {
+		r2.moveToDestination(m, 'A');
+		r1.shareMap(r2.getMaze());
+		Assert.assertFalse(r1.getVisited().isEmpty());
+	}
 	
 }

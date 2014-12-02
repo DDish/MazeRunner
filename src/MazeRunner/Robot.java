@@ -21,6 +21,7 @@ public class Robot {
 	private int row, col;
 	private boolean going = false, mute = false;
 	char marker;
+	char testMarker;
 	Maze maze;
 	JLabel groot;
 	Player p;
@@ -181,6 +182,7 @@ public class Robot {
 	{
 		going = true;
 		this.marker=marker;
+		this.testMarker = marker;
 		trueMap.editInProgress=true;
 		trueMap.clearBreadCrumbs();
 		if (maze.getMarkers().contains(marker))
@@ -329,6 +331,7 @@ public class Robot {
 			findRecursively(trueMap,row,col);
 			
 		}
+		
 		if(marker!='S') moveToDestination(trueMap,'S');//Go home
 		trueMap.editInProgress=false;
 		going=false;	
@@ -342,6 +345,9 @@ public class Robot {
 		groot.setIcon(new ImageIcon("images/COMMAND.gif"));
 	}
 		
+	public Set<MazeCell> getVisited() {
+		return visited;
+	}
 		
 
 	public void setMute(boolean b) {
@@ -540,10 +546,18 @@ public class Robot {
 			str+="Left";
 		groot.setIcon(new ImageIcon("images/"+str+".gif"));
 		try {
-			Thread.sleep(900);
+			Thread.sleep(450);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public char getTestMarker() {
+		return testMarker;
+	}
+	
+	public Maze getMaze() {
+		return maze;
 	}
 }
