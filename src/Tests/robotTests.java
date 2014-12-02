@@ -36,7 +36,7 @@ public class robotTests {
 		Assert.assertTrue(r.getColumn() == col && r.getRow()+1 == row);
 		System.out.println(r.getRow()+1 + " " + row);
 		r2.moveUp();
-		Assert.assertTrue(r2.getColumn() == col2 && r2.getRow() == row2);
+		Assert.assertTrue(r2.getColumn() == col2 && r2.getRow()+1 == row2);
 	}
 	@Test
 	public void testDown(){
