@@ -553,7 +553,7 @@ public class Robot {
 			str+="Left";
 		groot.setIcon(new ImageIcon("images/"+str+".gif"));
 		try {
-			Thread.sleep(450);
+			Thread.sleep(900);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
