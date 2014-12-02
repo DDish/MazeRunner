@@ -32,7 +32,7 @@ public class HubTests {
 	public void testNumBots() {
 		assertEquals(3, gui.getBots().size());
 		Hub gui2=new Hub("Maze.csv");
-		assertEquals(4, gui2.getBots().size());
+		assertEquals(10, gui2.getBots().size());
 	}
 	
 	// tests order of robots.

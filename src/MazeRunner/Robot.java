@@ -33,7 +33,7 @@ public class Robot {
 	public Robot(int row, int col, Maze maze, JLabel groot){
 		this.row = row;
 		this.col = col;//These start reversed, not sure if they are reversed or the calls to here are.
-		//this.maze = new Maze(row,col,maze.getRows(),maze.getCols());//make a blank copy of the map
+		this.maze = new Maze(row,col,maze.getRows(),maze.getCols());//make a blank copy of the map
 		this.groot = groot;
 		p = new Player();
 
