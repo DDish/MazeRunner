@@ -16,6 +16,8 @@ public class Robot {
 	public enum Marker {
 		CAVERN,BREADCRUMB;
 	}
+	private int NUM_ROWS = 34;
+	private int NUM_COLS = 34;
 	private int row, col;
 	private boolean going = false, mute = false;
 	char marker;
@@ -33,7 +35,7 @@ public class Robot {
 	public Robot(int row, int col, Maze maze, JLabel groot){
 		this.row = row;
 		this.col = col;//These start reversed, not sure if they are reversed or the calls to here are.
-		this.maze = new Maze(row,col,maze.getRows(),maze.getCols());//make a blank copy of the map
+		this.maze = new Maze(row,col,NUM_ROWS,NUM_COLS);//make a blank copy of the map
 		this.groot = groot;
 		p = new Player();
 
